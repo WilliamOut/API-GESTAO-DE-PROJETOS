@@ -19,13 +19,13 @@ public class Project {
     @Column(nullable = false,unique = true  )
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String description;
 
     @Column(nullable = false)
     private LocalDate startDate;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate endDate;
 
     @OneToMany(mappedBy = "project")

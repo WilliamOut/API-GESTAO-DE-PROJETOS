@@ -14,13 +14,11 @@ public class ProjectRequestDTO {
     @Size(min = 3,max = 100,message = "Tamanho do nome fora dos limites(3 - 100)")
     private String name;
 
-    @NotBlank(message = "Descrição é obrigatória")
     private String description;
 
     @NotNull(message = "A data inicial é obrigatória")
     private LocalDate startDate;
 
-    @NotNull(message = "A data final é obrigatória")
     private LocalDate endDate;
 
     public ProjectRequestDTO() {}
