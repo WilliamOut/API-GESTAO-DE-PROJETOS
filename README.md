@@ -126,3 +126,9 @@ Para executar os testes unitários (Service e Mappers) e verificar a integridade
 
 ```bash
 mvn test
+```
+
+### 🛠️ Tags
+`#Java` `#SpringBoot` `#Backend` `#DesafioTecnico`  
+`#API` `#RestAPI` `#H2` `#Oracle` `#JPA` `#Swagger`  
+`#CleanCode` `#SoftwareEngineering`
