@@ -23,13 +23,6 @@ public class ProjectRequestDTO{
 
     public ProjectRequestDTO() {}
 
-    public ProjectRequestDTO(Project dto) {
-        this.name = dto.getName();
-        this.description = dto.getDescription();
-        this.startDate = dto.getStartDate();
-        this.endDate = dto.getEndDate();
-    }
-
     public String getName() {
         return name;
     }

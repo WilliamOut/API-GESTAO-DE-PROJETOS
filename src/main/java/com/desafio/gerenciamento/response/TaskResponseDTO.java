@@ -20,21 +20,6 @@ public class TaskResponseDTO {
 
     }
 
-    public TaskResponseDTO(Task task) {
-        this.idTask = task.getId();
-        this.title = task.getTitle();
-        this.description = task.getDescription();
-        this.status = task.getStatus();
-        this.priority = task.getPriority();
-        this.dueDate = task.getDueDate();
-
-        if (task.getProject() != null) {
-            this.idProject = task.getProject().getId();
-        } else {
-            this.idProject = null;
-        }
-    }
-
     public Long getIdTask() {
         return idTask;
     }

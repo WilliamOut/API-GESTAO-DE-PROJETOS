@@ -2,14 +2,10 @@ package com.desafio.gerenciamento.controller;
 
 import java.util.List;
 
+import com.desafio.gerenciamento.request.UpdateTaskStatusDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.desafio.gerenciamento.model.Task;
 import com.desafio.gerenciamento.request.TaskRequestDTO;
@@ -30,9 +26,8 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<TaskResponseDTO> criarTask(@Valid @RequestBody TaskRequestDTO request) {
-        Task novaTask = taskService.criarTask(request);
-        TaskResponseDTO retornoNovaTask = new TaskResponseDTO(novaTask);
-        return new ResponseEntity<>(retornoNovaTask, HttpStatus.CREATED);
+        TaskResponseDTO novaTask = taskService.criarTask(request);
+        return new ResponseEntity<>(novaTask,HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -49,6 +44,18 @@ public class TaskController {
         }
 
         return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<TaskResponseDTO> atualizarStatus(@Valid @PathVariable Long id, @RequestBody UpdateTaskStatusDTO request) {
+        TaskResponseDTO taskAtualizada = taskService.atualizarStatus(id,request);
+        return new ResponseEntity<>(taskAtualizada,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarTask(@PathVariable Long id) {
+        taskService.deletarTask(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

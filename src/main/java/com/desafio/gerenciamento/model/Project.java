@@ -75,4 +75,8 @@ public class Project {
     public Set<Task> getTasks() {
         return tasks;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

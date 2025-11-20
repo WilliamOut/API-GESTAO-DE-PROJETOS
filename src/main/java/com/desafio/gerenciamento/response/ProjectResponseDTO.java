@@ -18,13 +18,6 @@ public class ProjectResponseDTO {
 
     public ProjectResponseDTO() {}
 
-    public ProjectResponseDTO(Project dto) {
-        this.id = dto.getId();
-        this.name = dto.getName();
-        this.description = dto.getDescription();
-        this.startDate = dto.getStartDate();
-        this.endDate = dto.getEndDate();
-    }
 
     public Long getId() {
         return id;
@@ -44,5 +37,25 @@ public class ProjectResponseDTO {
 
     public LocalDate getEndDate() {
         return endDate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }

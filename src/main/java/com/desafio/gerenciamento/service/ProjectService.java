@@ -2,6 +2,7 @@ package com.desafio.gerenciamento.service;
 
 import com.desafio.gerenciamento.handler.ProjectExists;
 import com.desafio.gerenciamento.handler.ResourceNotFoundException;
+import com.desafio.gerenciamento.mapper.ProjectMapper;
 import com.desafio.gerenciamento.model.Project;
 import com.desafio.gerenciamento.repository.ProjectRepository;
 import com.desafio.gerenciamento.request.ProjectRequestDTO;
@@ -10,30 +11,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final ProjectMapper projectMapper;
 
-    public ProjectService(ProjectRepository projectRepository) {
+    public ProjectService(ProjectRepository projectRepository,ProjectMapper projectMapper) {
         this.projectRepository = projectRepository;
+        this.projectMapper = projectMapper;
     }
 
     @Transactional
-    public Project criarProjeto(ProjectRequestDTO dto) {
-        Project acharProjeto = projectRepository.findByName(dto.getName());
-        if(acharProjeto != null) {
+    public ProjectResponseDTO criarProjeto(ProjectRequestDTO dto) {
+        if(projectRepository.findByName(dto.getName()) != null) {
             throw new ProjectExists("Projeto com o nome " + dto.getName() + " já existe!");
         }
-        Project novoProjeto = new Project();
-        novoProjeto.setName(dto.getName());
-        novoProjeto.setDescription(dto.getDescription());
-        novoProjeto.setStartDate(dto.getStartDate());
-        novoProjeto.setEndDate(dto.getEndDate());
-        return projectRepository.save(novoProjeto);
+        Project novoProjeto = projectMapper.toEntity(dto);
+        Project projetoSalvo = projectRepository.save(novoProjeto);
+
+        return projectMapper.toResponse(projetoSalvo);
     }
 
     @Transactional(readOnly = true)
@@ -42,9 +40,7 @@ public class ProjectService {
         if(pegarTodos.isEmpty()) {
             throw new ResourceNotFoundException("Nenhum projeto encontrado!");
         }
-        return pegarTodos.stream()
-                .map(ProjectResponseDTO::new)
-                .collect(Collectors.toList());
+        return projectMapper.toResponseList(pegarTodos);
     }
 }
 

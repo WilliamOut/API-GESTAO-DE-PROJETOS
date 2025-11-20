@@ -1,6 +1,5 @@
 package com.desafio.gerenciamento.controller;
 
-import com.desafio.gerenciamento.model.Project;
 import com.desafio.gerenciamento.request.ProjectRequestDTO;
 import com.desafio.gerenciamento.response.ProjectResponseDTO;
 import com.desafio.gerenciamento.service.ProjectService;
@@ -23,9 +22,8 @@ public class ProjectController {
 
     @PostMapping
     public ResponseEntity<ProjectResponseDTO> criarNovoProjeto(@Valid @RequestBody ProjectRequestDTO request) {
-        Project novoProjeto = projectService.criarProjeto(request);
-        ProjectResponseDTO response = new ProjectResponseDTO(novoProjeto);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        ProjectResponseDTO novoProjeto = projectService.criarProjeto(request);
+        return new ResponseEntity<>(novoProjeto, HttpStatus.CREATED);
     }
 
     @GetMapping

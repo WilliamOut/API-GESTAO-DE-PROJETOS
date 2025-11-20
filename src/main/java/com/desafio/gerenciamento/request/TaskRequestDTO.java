@@ -34,16 +34,6 @@ public class TaskRequestDTO {
 
     }
 
-    public TaskRequestDTO(String title, String description, Status status, Priority priority,
-            LocalDate dueDate, Long idProject) {
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.priority = priority;
-        this.dueDate = dueDate;
-        this.idProject = idProject;
-    }
-
     public String getTitle() {
         return title;
     }
